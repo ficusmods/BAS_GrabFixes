@@ -1,0 +1,22 @@
+{
+  "$type": "ThunderRoad.LevelData, ThunderRoad",
+  "id": "Master",
+  "version": 3,
+  "modes": [
+    {
+      "name": "Default",
+      "modules": [
+        {
+          "$type": "GrabFixes.LoadModule, GrabFixes",
+          "mod_version": "1.0",
+          "mod_name": "GrabFixes",
+          "logger_level": "Basic",
+          
+          "FixLiftRotation": true,
+          "FixGrabMove": true,
+          "GrabMoveStopRadius": 0.8
+        }
+      ]
+    }
+  ]
+}
