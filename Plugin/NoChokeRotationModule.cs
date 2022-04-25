@@ -61,10 +61,10 @@ namespace GrabFixes
                 if(alterHipHeight)
                 {
                     creature.morphology.hipsHeight = creature.ragdoll.GetPart(RagdollPart.Type.Head).transform.position.y;
+                    creature.UpdateFall();
+                    creature.turnSpeed = 0.0f;
+                    active = true;
                 }
-                creature.UpdateFall();
-                creature.turnSpeed = 0.0f;
-                active = true;
             }
             else
             {
