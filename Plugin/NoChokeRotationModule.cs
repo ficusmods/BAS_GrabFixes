@@ -32,12 +32,13 @@ namespace GrabFixes
 
         private void Creature_OnFallEvent(Creature.FallState state)
         {
-            if(active)
+            if (state == Creature.FallState.Falling)
             {
-                if (state == Creature.FallState.Falling)
-                {
-                    alterHipHeight = true;
-                }
+                alterHipHeight = true;
+            }
+            else if(state == Creature.FallState.None)
+            {
+                alterHipHeight = false;
             }
         }
 
@@ -80,7 +81,6 @@ namespace GrabFixes
                     }
                     creature.turnSpeed = oriTurnSpeed;
                     creature.morphology.hipsHeight = oriHipsHeight;
-                    alterHipHeight = false;
                 }
                 active = false;
             }
