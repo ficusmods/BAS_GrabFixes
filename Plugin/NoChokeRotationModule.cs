@@ -42,19 +42,12 @@ namespace GrabFixes
             }
         }
 
-        public void RefreshFallstate(Creature.FallState fallstate)
-        {
-            var method = creature.GetType().GetMethod("RefreshFallState", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            method.Invoke(creature, new object[] { fallstate });
-        }
-
         void Update()
         {
             if (Config.fixLiftRotation && watchedFallStates.Contains(creature.fallState) && (creature.ragdoll.isGrabbed || creature.ragdoll.isTkGrabbed))
             {
                 if (!active)
                 {
-                    RagdollPart neckPart = creature.ragdoll.GetPart(RagdollPart.Type.Neck);
                     oriTurnSpeed = creature.turnSpeed;
                     oriHipsHeight = creature.morphology.hipsHeight;
                 }
@@ -70,7 +63,6 @@ namespace GrabFixes
             {
                 if (active)
                 {
-                    RagdollPart neckPart = creature.ragdoll.GetPart(RagdollPart.Type.Neck);
                     creature.turnSpeed = oriTurnSpeed;
                     creature.morphology.hipsHeight = oriHipsHeight;
                 }
