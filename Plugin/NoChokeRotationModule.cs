@@ -55,10 +55,6 @@ namespace GrabFixes
                 if (!active)
                 {
                     RagdollPart neckPart = creature.ragdoll.GetPart(RagdollPart.Type.Neck);
-                    foreach (HandleRagdoll handle in neckPart.handles)
-                    {
-                        handle.handleRagdollData.bodyTurnDirection = HandleRagdollData.BodyTurnDirection.GrabberPosition;
-                    }
                     oriTurnSpeed = creature.turnSpeed;
                     oriHipsHeight = creature.morphology.hipsHeight;
                 }
@@ -75,10 +71,6 @@ namespace GrabFixes
                 if (active)
                 {
                     RagdollPart neckPart = creature.ragdoll.GetPart(RagdollPart.Type.Neck);
-                    foreach (HandleRagdoll handle in neckPart.handles)
-                    {
-                        handle.handleRagdollData.bodyTurnDirection = HandleRagdollData.BodyTurnDirection.PartDirection;
-                    }
                     creature.turnSpeed = oriTurnSpeed;
                     creature.morphology.hipsHeight = oriHipsHeight;
                 }
