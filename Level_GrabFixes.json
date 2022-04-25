@@ -14,7 +14,7 @@
           
           "FixLiftRotation": true,
           "FixGrabMove": true,
-          "GrabMoveStopRadius": 0.8
+          "GrabMoveStopRadius": 0.7
         }
       ]
     }
