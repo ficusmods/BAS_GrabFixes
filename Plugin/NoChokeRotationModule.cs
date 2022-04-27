@@ -12,10 +12,7 @@ namespace GrabFixes
     class NoChokeRotationModule : MonoBehaviour
     {
         Creature creature;
-        float oriTurnSpeed = 0.0f;
-        float oriHipsHeight = 0.0f;
-
-        bool alterHipHeight = false;
+        float oriDestabilizedSpringRotationMultiplier = 0.0f;
         bool active = false;
 
         public static HashSet<Creature.FallState> watchedFallStates = new HashSet<Creature.FallState> { Creature.FallState.Falling, Creature.FallState.Stabilizing, Creature.FallState.NearGround, Creature.FallState.StabilizedOnGround };
@@ -23,24 +20,9 @@ namespace GrabFixes
         void Awake()
         {
             creature = gameObject.GetComponent<Creature>();
-            oriTurnSpeed = creature.turnSpeed;
-            oriHipsHeight = creature.morphology.hipsHeight;
-
-            creature.OnFallEvent -= Creature_OnFallEvent;
-            creature.OnFallEvent += Creature_OnFallEvent;
+            oriDestabilizedSpringRotationMultiplier = creature.ragdoll.destabilizedSpringRotationMultiplier;
         }
 
-        private void Creature_OnFallEvent(Creature.FallState state)
-        {
-            if (state == Creature.FallState.Falling)
-            {
-                alterHipHeight = true;
-            }
-            else if(state == Creature.FallState.None)
-            {
-                alterHipHeight = false;
-            }
-        }
 
         void Update()
         {
@@ -48,14 +30,8 @@ namespace GrabFixes
             {
                 if (!active)
                 {
-                    oriTurnSpeed = creature.turnSpeed;
-                    oriHipsHeight = creature.morphology.hipsHeight;
-                }
-                if(alterHipHeight)
-                {
-                    creature.morphology.hipsHeight = creature.ragdoll.GetPart(RagdollPart.Type.Head).transform.position.y;
+                    creature.ragdoll.destabilizedSpringRotationMultiplier = creature.ragdoll.destabilizedGroundSpringRotationMultiplier;
                     creature.UpdateFall();
-                    creature.turnSpeed = 0.0f;
                     active = true;
                 }
             }
@@ -63,8 +39,8 @@ namespace GrabFixes
             {
                 if (active)
                 {
-                    creature.turnSpeed = oriTurnSpeed;
-                    creature.morphology.hipsHeight = oriHipsHeight;
+                    creature.ragdoll.destabilizedSpringRotationMultiplier = oriDestabilizedSpringRotationMultiplier;
+                    creature.UpdateFall();
                 }
                 active = false;
             }
