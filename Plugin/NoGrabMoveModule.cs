@@ -24,6 +24,8 @@ namespace GrabFixes
 
         void Update()
         {
+            if (!Player.local || !Player.local.creature) return;
+
             bool toActivate = false;
             if (Config.fixGrabMove)
             {
