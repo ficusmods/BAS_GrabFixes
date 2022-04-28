@@ -8,7 +8,7 @@
       "modules": [
         {
           "$type": "GrabFixes.LoadModule, GrabFixes",
-          "mod_version": "1.0",
+          "mod_version": "1.1",
           "mod_name": "GrabFixes",
           "logger_level": "Basic",
           
