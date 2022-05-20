@@ -25,17 +25,20 @@ namespace GrabFixes
         void Update()
         {
             if (!Player.local || !Player.local.creature) return;
+            if (creature.ragdoll.GetPart(RagdollPart.Type.LeftFoot) == null || creature.ragdoll.GetPart(RagdollPart.Type.RightFoot) == null) return;
 
             bool toActivate = false;
             if (Config.fixGrabMove)
             {
-                Vector3 playerLoc = Player.local.creature.ragdoll.headPart.transform.position;
-                float dist = float.MaxValue;
-                foreach (var handler in creature.ragdoll.handlers)
-                {
-                    float currDist = Vector3.Distance(handler.grabbedHandle.transform.position, playerLoc);
-                    dist = Math.Min(currDist, dist);
-                }
+                Vector3 playerLeftFeetLoc = Player.local.creature.ragdoll.GetPart(RagdollPart.Type.LeftFoot).transform.position;
+                Vector3 playerRightFeetLoc = Player.local.creature.ragdoll.GetPart(RagdollPart.Type.RightFoot).transform.position;
+                Vector3 playerLoc = Vector3.Lerp(playerLeftFeetLoc, playerRightFeetLoc, 0.5f);
+
+                Vector3 creatureLeftFeetLoc = creature.ragdoll.GetPart(RagdollPart.Type.LeftFoot).transform.position;
+                Vector3 creatureRightFeetLoc = creature.ragdoll.GetPart(RagdollPart.Type.RightFoot).transform.position;
+                Vector3 creatureLoc = Vector3.Lerp(creatureLeftFeetLoc, creatureRightFeetLoc, 0.5f);
+
+                float dist = Vector3.Distance(creatureLoc, playerLoc);
                 toActivate = (dist <= Config.grabMoveStopRadius) ? true : false;
             }
 
