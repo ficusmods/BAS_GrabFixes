@@ -8,12 +8,12 @@
       "modules": [
         {
           "$type": "GrabFixes.LoadModule, GrabFixes",
-          "mod_version": "1.1",
+          "mod_version": "1.3",
           "mod_name": "GrabFixes",
           "logger_level": "Basic",
           
           "FixLiftRotation": true,
-          "FixGrabMove": true,
+          "FixGrabMove": false,
           "GrabMoveStopRadius": 0.7
         }
       ]

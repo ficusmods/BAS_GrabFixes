@@ -24,7 +24,7 @@ namespace GrabFixes
         }
 
 
-        void Update()
+        void FixedUpdate()
         {
             if (Config.fixLiftRotation && watchedFallStates.Contains(creature.fallState) && (creature.ragdoll.isGrabbed || creature.ragdoll.isTkGrabbed))
             {

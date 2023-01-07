@@ -22,7 +22,7 @@ namespace GrabFixes
             moveModule = creature.brain.instance.GetModule<BrainModuleMove>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (!Player.local || !Player.local.creature) return;
             if (creature.ragdoll.GetPart(RagdollPart.Type.LeftFoot) == null || creature.ragdoll.GetPart(RagdollPart.Type.RightFoot) == null) return;
